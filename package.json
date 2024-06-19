@@ -1,0 +1,32 @@
+{
+    "name": "colorful-log",
+    "version": "0.0.1",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsup",
+        "lint": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/halibal/colorful-log.git"
+    },
+    "keywords": [
+        "console",
+        "logger",
+        "color",
+        "typescript",
+        "javascript"
+    ],
+    "author": "Halibal",
+    "bugs": {
+        "url": "https://github.com/halibal/colorful-log/issues"
+    },
+    "homepage": "https://github.com/halibal/colorful-log#readme",
+    "devDependencies": {
+        "tsup": "^8.1.0",
+        "typescript": "^5.4.5"
+    }
+}
