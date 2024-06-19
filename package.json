@@ -1,5 +1,5 @@
 {
-    "name": "colorful-log",
+    "name": "@halibal/colorful-log",
     "version": "0.0.1",
     "license": "MIT",
     "main": "dist/index.js",
