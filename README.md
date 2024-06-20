@@ -7,7 +7,13 @@ A simple and customizable colorful console logger for Node.js applications writt
 You can install this package using npm:
 
 ```sh
-npm install colorful-log
+npm i @halibal/colorful-log
+```
+
+pnpm:
+
+```sh
+pnpm add @halibal/colorful-log
 ```
 
 ## Usage
