@@ -4,6 +4,3 @@
 .env
 .env.local
 .DS_Store
-
-tsconfig.json
-tsup.config.ts

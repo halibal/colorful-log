@@ -16,3 +16,7 @@ export type ColorfulLog = (
     messages: any[],
     options?: Array<keyof ColorfulConsole>
 ) => void;
+
+export type CircularObj = {
+    self?: CircularObj;
+};

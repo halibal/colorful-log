@@ -2,6 +2,15 @@
 
 A simple and customizable colorful console logger for Node.js applications written in TypeScript. This package allows you to log messages with different colors and formatting options such as bold and underline.
 
+## Update 0.0.3
+
+-   Now you can `colorfulLog` the `FormData` types, too.
+-   `functions` and `symbols` converted to strings.
+-   `undefined` and `null` values are explicitly converted to string.
+-   special objects:
+    -   `Blob` is handled.
+-   added basic test scenarios
+
 ## Installation
 
 You can install this package using npm:
