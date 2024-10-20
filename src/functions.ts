@@ -1,23 +1,30 @@
 import { colors } from './colors';
-import { ColorfulLog } from './types';
+import { ColorfulLogParams } from './types';
 
 /**
  *
  * @param color - The color of the message with ANSI code
- * @param messages - The messages to be logged
+ * @param message - The message to be logged
  * @param options - Additional formatting options (bold, underline)
  *
  */
-export const colorfulLog: ColorfulLog = (color, messages, options = []) => {
+
+function colorfulLog({
+    color = 'blue',
+    message,
+    options = []
+}: ColorfulLogParams) {
     let formatString = colors[color];
+
+    const normalizedMessages = Array.isArray(message) ? message : [message];
+
     if (options.length) {
-        formatString =
-            options.map((option) => colors[option]).join('') + formatString;
+        formatString = `${options
+            .map((option) => colors[option])
+            .join('')}${formatString}`;
     }
 
-    const cache = new Set();
-
-    const messageString = messages
+    const messageString = normalizedMessages
         .map((message) => {
             if (typeof message === 'object') {
                 if (message instanceof FormData) {
@@ -32,34 +39,7 @@ export const colorfulLog: ColorfulLog = (color, messages, options = []) => {
                     );
                     return `FormData: {\n${formDataEntries.join(',\n')}\n}`;
                 } else {
-                    try {
-                        return JSON.stringify(
-                            message,
-                            (_, value) => {
-                                if (typeof value === 'function') {
-                                    return `[Function: ${
-                                        value.name || 'anonymous'
-                                    }]`;
-                                }
-                                if (typeof value === 'symbol') {
-                                    return value.toString();
-                                }
-                                if (
-                                    typeof value === 'object' &&
-                                    value !== null
-                                ) {
-                                    if (cache.has(value)) {
-                                        return '[Circular]';
-                                    }
-                                    cache.add(value);
-                                }
-                                return value;
-                            },
-                            2
-                        ); // Pretty print objects
-                    } catch (e) {
-                        return message.toString(); // Fallback if JSON.stringify fails
-                    }
+                    return safeStringify(message);
                 }
             }
             if (message === undefined) {
@@ -73,4 +53,33 @@ export const colorfulLog: ColorfulLog = (color, messages, options = []) => {
         .join(' ');
 
     console.log(formatString + '%s' + colors.reset, messageString);
-};
+}
+
+function safeStringify(obj: any) {
+    const cache = new Set();
+    try {
+        return JSON.stringify(
+            obj,
+            (_, value) => {
+                if (typeof value === 'function') {
+                    return `[Function: ${value.name || 'anonymous'}]`;
+                }
+                if (typeof value === 'symbol') {
+                    return value.toString();
+                }
+                if (typeof value === 'object' && value !== null) {
+                    if (cache.has(value)) {
+                        return '[Circular]';
+                    }
+                    cache.add(value);
+                }
+                return value;
+            },
+            2
+        );
+    } catch (e) {
+        return obj.toString(); // Fallback if JSON.stringify fails
+    }
+}
+
+export { colorfulLog };

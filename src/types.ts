@@ -11,11 +11,11 @@ export type ColorfulConsole = {
     underline: string;
 };
 
-export type ColorfulLog = (
-    color: keyof ColorfulConsole,
-    messages: any[],
-    options?: Array<keyof ColorfulConsole>
-) => void;
+export type ColorfulLogParams = {
+    color?: keyof ColorfulConsole;
+    message: any[] | any;
+    options?: Array<keyof ColorfulConsole>;
+};
 
 export type CircularObj = {
     self?: CircularObj;

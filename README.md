@@ -1,8 +1,10 @@
 # Colorful Log Package
 
-A simple and customizable colorful console logger for Node.js applications written in TypeScript. This package allows you to log messages with different colors and formatting options such as bold and underline.
+A simple and customizable colorful console logger for Node.js applications written in TypeScript. This package allows you to log message with different colors and formatting options such as bold and underline.
 
-## Update 0.0.3
+## Changelog
+
+### Update 0.0.3
 
 -   Now you can `colorfulLog` the `FormData` types, too.
 -   `functions` and `symbols` converted to strings.
@@ -11,25 +13,69 @@ A simple and customizable colorful console logger for Node.js applications writt
     -   `Blob` is handled.
 -   added basic test scenarios
 
+### Update 0.0.4
+
+-   Improved separation of production and test builds.
+-   Added separate output directories for test files.
+-   Updated how the `colorfulLog` function receives parameters. It now accepts an object with `color`, `message`, and `options` for clearer usage.
+    -   Default `color` value is set to be `blue`, passing it is optional.
+    -   `message` is required and can be a single message or an array of messages.
+    -   Default `options` value is set to be an empty array, passing it is optional.
+
 ## Installation
 
-You can install this package using npm:
+You can install this package using npm or pnpm:
+
+### npm:
 
 ```sh
-npm i @halibal/colorful-log
+npm install @halibal/colorful-log
 ```
 
-pnpm:
+### pnpm:
 
 ```sh
 pnpm add @halibal/colorful-log
 ```
 
+## Running Tests
+
+To run the test build and execute the tests:
+
+```sh
+pnpm test
+```
+
+This will generate test files in the `dist/tests/` directory and run them.
+
+## Build and Production
+
+To build the package for production:
+
+```sh
+pnpm build
+```
+
+For test builds:
+
+```sh
+pnpm build:test
+```
+
+This separates production files into the `dist/` folder and test files into the `dist/tests/` folder.
+
 ## Usage
 
-Import the `colorfulLog` function and use it to log messages with different colors and formatting options.
+The `colorfulLog` function accepts both a single message or an array of messages, providing flexibility for different logging needs.
 
-```tsx
+The `colorfulLog` function now accepts an object with `color`, `message`, and `options` parameters:
+
+-   `color`: (optional) Defaults to `blue` if not specified.
+-   `options`: (optional) Defaults to an empty array, allowing for additional formatting like bold or underline.
+
+### TypeScript:
+
+```ts
 import { colorfulLog } from 'colorful-log';
 
 const nestedObject = {
@@ -47,15 +93,47 @@ const nestedObject = {
     }
 };
 
-colorfulLog('green', ['Operation successful:', nestedObject], ['underline']);
-colorfulLog(
-    'red',
-    ['Error occurred:', { message: 'Something went wrong', code: 500 }],
-    ['bold']
-);
-colorfulLog('blue', ['This is an info message'], ['bold', 'underline']);
-colorfulLog('purple', ['This is a regular message with no extra formatting']);
+colorfulLog({
+    message: 'Logging a simple message'
+});
+
+colorfulLog({
+    color: 'green',
+    message: ['Operation successful:', { status: 'ok' }]
+});
+
+colorfulLog({
+    message: ['Operation successful:', nestedObject],
+    options: ['underline']
+});
+
+colorfulLog({
+    color: 'red',
+    message: [
+        'Error occurred:',
+        { message: 'Something went wrong', code: 500 }
+    ],
+    options: ['bold']
+});
+
+colorfulLog({
+    message: [
+        'This is an default blue message with bold and underline formatting'
+    ],
+    options: ['bold', 'underline']
+});
+
+colorfulLog({
+    color: 'purple',
+    message: ['This is a regular message with no extra formatting']
+});
 ```
+
+### Parameters:
+
+-   `color`: (optional) The color of the log, such as `'green'`, `'red'`, etc. Defaults to `'blue'` if not provided
+-   `message`: (required) Accepts either a single message (string, object, etc.) or an array of messages.
+-   `options`: (optional) Defaults to an empty array. Can include `'bold'`, `'underline'`, etc.
 
 ## Available Colors
 
@@ -69,26 +147,18 @@ The following colors are available for logging:
 -   Purple
 -   White
 
-## Available Colors
-
-The following colors are available for logging:
-
--   ![Black](https://i.imgur.com/sNSFHmr.jpeg)
--   ![Red](https://imgur.com/bCutWpG.jpeg)
--   ![Green](https://imgur.com/wtP79e5.jpeg)
--   ![Yellow](https://imgur.com/aMJiuUu.jpeg)
--   ![Blue](https://imgur.com/sPCq9pI.jpeg)
--   ![Purple](https://imgur.com/tLXCnDI.jpeg)
--   ![White](https://imgur.com/pZNKTB1.jpeg)
-
 ## Formatting Options
 
 In addition to colors, you can also add formatting options:
 
--   ![Bold](https://imgur.com/he2flDN.jpeg)
--   ![Underlined](https://imgur.com/xUfCQ9o.jpeg)
--   ![Bold & Underlined](https://imgur.com/O675lAB.jpeg)
+-   Bold
+-   Underlined
+-   Bold & Underlined
 
 ## License
 
 This project is licensed under the MIT License.
+
+## Contributing
+
+We welcome contributions! Please fork the repository, create a branch, and submit a pull request with your improvements.

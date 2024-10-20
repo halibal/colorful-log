@@ -1,5 +1,14 @@
-/src
-/node_modules
+tsconfig.json
+tsup.config.ts
+
+# Ignore test files
+dist/tests/
+
+# Ignore sourcemaps if not needed
+*.map
+
+src/
+node_modules/
 
 .env
 .env.local

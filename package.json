@@ -1,14 +1,19 @@
 {
     "name": "@halibal/colorful-log",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license": "MIT",
+    "files": [
+        "dist/main.*",
+        "README.md"
+    ],
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsup",
+        "build": "cross-env NODE_ENV=production tsup",
+        "build:test": "cross-env NODE_ENV=test tsup",
         "lint": "tsc",
-        "test": "node dist/tests/test.js"
+        "test": "pnpm build:test && node dist/tests/test.js"
     },
     "repository": {
         "type": "git",
@@ -27,6 +32,8 @@
     },
     "homepage": "https://github.com/halibal/colorful-log#readme",
     "devDependencies": {
+        "@types/node": "^22.7.7",
+        "cross-env": "^7.0.3",
         "tsup": "^8.1.0",
         "typescript": "^5.4.5"
     }
