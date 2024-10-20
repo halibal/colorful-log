@@ -1,6 +1,6 @@
 {
     "name": "@halibal/colorful-log",
-    "version": "0.0.5",
+    "version": "0.0.4",
     "license": "MIT",
     "files": [
         "dist/main.*",
