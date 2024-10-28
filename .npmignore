@@ -7,11 +7,8 @@ dist/tests/
 # Ignore sourcemaps if not needed
 *.map
 
-src/
 node_modules/
 
 .env
 .env.local
 .DS_Store
-
-dist/tests

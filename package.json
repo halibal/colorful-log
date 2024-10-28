@@ -3,7 +3,10 @@
     "version": "0.0.4",
     "license": "MIT",
     "files": [
-        "dist/main.*",
+        "dist/index.js",
+        "dist/index.mjs",
+        "dist/index.d.ts",
+        "LICENSE",
         "README.md"
     ],
     "main": "dist/index.js",
